@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository; // Fixed typo here
+    private final UserRepository userRepository;
 
     @Override
     public List<User> getAll() {
@@ -23,17 +23,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(UUID id) {
-        return userRepository.selectById(id).orElseThrow();
+        return userRepository.selectById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
     @Override
     public User create(CreateUserRequest request) {
-        User user = new User(UUID.randomUUID(), request.name(), request.username(), request.password(), true);
-        return userRepository.insert(user);
-
+        User newUser = new User(
+                UUID.randomUUID(),
+                request.name(),
+                request.username(),
+                request.password(),
+                true
+        );
+        userRepository.insert(newUser);
+        return newUser;
     }
-
     @Override
     public void delete(UUID id) {
-        return userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
-        }
+}

@@ -1,8 +1,6 @@
 package kh.edu.istad.restapim2.repository;
 
-
-
-import kh.edu.istad.restapi.model.User;
+import kh.edu.istad.restapim2.model.User; // Fixed package path
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ public class UserRepository {
         users = new ArrayList<>();
         User usrAdmin = new User(UUID.randomUUID(), "Administrator", "Admin", "qwer", true);
         User usrEditor = new User(UUID.randomUUID(), "Editor", "editor", "qwer", false);
-        User usrCustomer = new User(UUID.randomUUID(), "Sokheng", "sokheng", "qwer", true);
+        User usrCustomer = new User(UUID.randomUUID(), "JingJork", "jingjjork", "qwer", true);
 
         users.add(usrAdmin);
         users.add(usrEditor);
